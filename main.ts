@@ -25,6 +25,19 @@ const LINE =
   "After three years of saying no to every request, I am finally saying yes to one: my own resignation.";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+
+// Gate check, before anything is written: the bounty refuses an entry
+// that is not UTF-8, empty, only whitespace, or over 140 characters.
+// Validate here so a future edit to the line fails loudly at run time
+// instead of silently producing an invalid entry.
+const bytes = Buffer.from(LINE, "utf8");
+if (LINE !== bytes.toString("utf8")) throw new Error("line is not valid UTF-8");
+if (LINE.trim().length === 0) throw new Error("line is empty or only whitespace");
+if (LINE.includes("\n") || LINE.includes("\r")) throw new Error("line must be one line");
+if (LINE.length < 1 || LINE.length > 140) {
+  throw new Error(`line must be 1-140 characters, got ${LINE.length}`);
+}
+
 mkdirSync(outDir, { recursive: true });
 const outPath = join(outDir, "entry.txt");
 writeFileSync(outPath, LINE, "utf8");
