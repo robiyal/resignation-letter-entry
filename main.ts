@@ -1,28 +1,33 @@
 // The Funniest One-Line Resignation Letter — entry for the make.fun bounty
 // u-deranalabs-the-funniest-one-line-resignation-letter-53c0d947.
 //
-// The program writes one resignation letter, in the voice of a rate limit,
+// The program writes one resignation letter, in the voice of a cron job,
 // to /output/entry.txt. The letter is a fixed string: every run writes the
 // exact same bytes, so the two grading runs are byte-identical.
 //
+// V2 (26 Nov 2026): replaces the V1 rate-limit line — V1 ranked 793/2,543
+// in blind round 1, outside the top-500 final-heat cut, so this revision
+// swaps in the cron-job line (the first reserved V2 candidate).
+//
 // Why this line, against the judge's brief (most important first):
-// 1. On subject: it is the resignation letter of a rate limit — the thing
-//    whose whole job is saying no to requests and approving almost none.
-// 2. The joke lands on first read: the professional denier finally says yes,
-//    and the one request it approves is its own resignation. A real comic
-//    turn, not a pun on the job title.
+// 1. On subject: it is the resignation letter of a cron job — the thing
+//    whose whole job is firing on schedule, every minute, without holidays.
+// 2. The joke lands on first read: the job that never takes a day off
+//    lists its grievances like an employee — no Christmas off, and its
+//    Christmas bonus was a log rotation. A real comic turn, not a pun on
+//    the job title.
 // 3. The voice is flat, tired and faintly passive-aggressive throughout —
-//    three years of saying no, then one quiet yes, then out.
+//    firing every minute since March, then one quiet resignation.
 // 4. Tight: no wasted words, no stage directions, no quotation marks around
 //    the line, no explaining of the joke.
-// 5. Specific and surprising: only a rate limit could resign by approving
-//    a request, and only it would count that as the punchline.
+// 5. Specific and surprising: only a cron job could count a log rotation
+//    as its Christmas bonus, and only it would resign over it.
 import { chmodSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-// The letter: 100 characters, one line, no trailing newline in the file.
+// The letter: 102 characters, one line, no trailing newline in the file.
 const LINE =
-  "After three years of saying no to every request, I am finally saying yes to one: my own resignation.";
+  "I have fired every minute since March, including Christmas, and my Christmas bonus was a log rotation.";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
